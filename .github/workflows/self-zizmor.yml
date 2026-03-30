@@ -1,0 +1,17 @@
+name: GitHub Actions security analysis with zizmor
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+permissions: {}
+
+jobs:
+  zizmor:
+    uses: ./.github/workflows/zizmor.yml
+    permissions:
+      security-events: write # Required for upload-sarif (used by zizmor-action) to upload SARIF files.
+      contents: read # Only needed for private repos. Needed to clone the repo.
+      actions: read # Only needed for private repos. Needed for upload-sarif to read workflow run info.
